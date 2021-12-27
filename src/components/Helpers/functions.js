@@ -1,3 +1,5 @@
+import { TagInput, TagTextArea, TypeText, TypeNumber, TypeEmail, GET, PUT, POST } from "./reusableVariables";
+
 export const fetchMethod = (URL, method, data, functionHandler) => {
 
     fetch(URL, {
@@ -10,7 +12,7 @@ export const fetchMethod = (URL, method, data, functionHandler) => {
         .then(response => response.json())
         .then(data => {
 
-            if (method === 'GET' || method === "PUT") {
+            if (method === GET || method === PUT) {
 
 
                 if (functionHandler !== null) {
@@ -35,6 +37,8 @@ export const fetchMethod = (URL, method, data, functionHandler) => {
         .catch((error) => {
             console.error('Error:', error);
         });
+
+        return () => {}
 
 }
 
@@ -76,13 +80,13 @@ export const borrowHandler = (e, bookId, bookState, fetchData) => {
     
     const data = newBookState[bookId];
 
-    fetchMethod(URL, 'PUT', data, fetchData);
+    fetchMethod(URL, PUT, data, fetchData);
 
 }
 
 export const postData = (URL, data) => {
 
-    fetchMethod(URL, 'POST', data, null);
+    fetchMethod(URL, POST, data, null);
 
 }
 
@@ -128,31 +132,31 @@ export const fetchEditHandler = (setEditDataState, id, fetchDataName) => {
                         id: key,
                         error: false,
                         fullName: data.authors[key],
-                        tag: "input",
-                        type: "text"
+                        tag: TagInput,
+                        type: TypeText
                     })
         
                 }
     
                 newData = [
-                    {type: "text",title: "Image link", name:"thumbnailUrl", tag: "input", value: data.thumbnailUrl, error: false},
-                    {type: "text",title: "Title", name:"title", tag: "input", value: data.title, error: false},
+                    {type: TypeText,title: "Image link", name:"thumbnailUrl", tag: TagInput, value: data.thumbnailUrl, error: false},
+                    {type: TypeText,title: "Title", name:"title", tag: TagInput, value: data.title, error: false},
                     {title: "Author", name:"authors", value: authors},
-                    {type: "text",title: "Description", name:"longDescription", tag: "textarea", value: data.longDescription, error: false},
-                    {type: "number",title: "Pages", name:"pageCount", tag: "input", value: data.pageCount, error: false},
+                    {type: TypeText,title: "Description", name:"longDescription", tag: TagTextArea, value: data.longDescription, error: false},
+                    {type: TypeNumber,title: "Pages", name:"pageCount", tag: TagInput, value: data.pageCount, error: false},
                     {title: "Borrowed", value: data.borrowed === undefined ? false : data.borrowed}
                 ]
             
             } else {
 
                 newData = [
-                    {type: "text",title: "Image link", name:"imageLink", tag: "input", value: data.picture, error: false},
-                    {type: "text",title: "Full name", name:"fullName", tag: "input", value: data.name, error: false},
-                    {type: "text",title: "Gender", name:"gender", tag: "input", value: data.gender, error: false},
-                    {type: "text",title: "Birthday", name:"birthday", tag: "input", value: data.birthday, error: false},
-                    {type: "text",title: "Phone", name:"phone", tag: "input", value: data.phone, error: false},
-                    {type: "text",title: "Address", name:"address", tag: "input", value: data.address, error: false},
-                    {type: "email",title: "Email", name:"email", tag: "input", value: data.email, error: false}
+                    {type: TypeText,title: "Image link", name:"imageLink", tag: TagInput, value: data.picture, error: false},
+                    {type: TypeText,title: "Full name", name:"fullName", tag: TagInput, value: data.name, error: false},
+                    {type: TypeText,title: "Gender", name:"gender", tag: TagInput, value: data.gender, error: false},
+                    {type: TypeText,title: "Birthday", name:"birthday", tag: TagInput, value: data.birthday, error: false},
+                    {type: TypeText,title: "Phone", name:"phone", tag: TagInput, value: data.phone, error: false},
+                    {type: TypeText,title: "Address", name:"address", tag: TagInput, value: data.address, error: false},
+                    {type: TypeEmail,title: "Email", name: TypeEmail, tag: TagInput, value: data.email, error: false}
                 ]
 
             }

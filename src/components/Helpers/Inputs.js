@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import { postData } from "./functions";
+import { USER, InputError } from "./reusableVariables";
 
 const Inputs = (props) => {
 
@@ -23,7 +24,7 @@ const Inputs = (props) => {
 
         if (
 
-                props.addingNew === "USER" ?
+                props.addingNew === USER ?
 
                 props.inputsState[0].value === "" ||
                 props.inputsState[1].value === "" ||
@@ -71,7 +72,7 @@ const Inputs = (props) => {
 
         let userData = {};
 
-        if (props.addingNew === "USER") {
+        if (props.addingNew === USER) {
 
             userData = {
                 picture: props.inputsState[0].value,
@@ -87,7 +88,7 @@ const Inputs = (props) => {
         
         postData(
             props.postUrl,
-            props.addingNew === "USER" ? userData : bookData
+            props.addingNew === USER ? userData : bookData
         );
 
         resetInputData();
@@ -121,7 +122,7 @@ const Inputs = (props) => {
                     <Fragment>
                         <p>{el.title}</p>
                         <Element type={el.type} onChange={(e) => onInputChange(e, el.id)} value={el.value} name={el.title} /> 
-                        <div className="InputError" style={{display: el.error ? "block" : "none"}}>Required field</div>
+                        <div className={InputError} style={{display: el.error ? "block" : "none"}}>Required field</div>
                     </Fragment>
                     
                     :
@@ -129,7 +130,7 @@ const Inputs = (props) => {
                     <Fragment>
                         <p>{el.title}</p>
                         <Element type={el.type} onChange={(e) => onInputChange(e, el.id)} value={el.value} name={el.title} ></Element>  
-                        <div className="InputError" style={{display: el.error ? "block" : "none"}}>Required field</div>
+                        <div className={InputError} style={{display: el.error ? "block" : "none"}}>Required field</div>
                     </Fragment>               
 
                 }

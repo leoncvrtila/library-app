@@ -3,6 +3,8 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { fetchMethod } from "../Helpers/functions";
 import { fetchEditHandler } from "../Helpers/functions";
+import { AUTHOR, USER_LOWERCASE, BOOK_LOWERCASE, InputError, EditElement, PUT, TagInput, AUTHORS_LOWERCASE } from "./reusableVariables";
+
 
 const EditTemplate = (props) => {
 
@@ -24,7 +26,7 @@ const EditTemplate = (props) => {
 
         let newState = [...editDataState];
 
-        if (props.editTitle === "user") {
+        if (props.editTitle === USER_LOWERCASE) {
 
             newState[id].value = e.target.value;
     
@@ -32,7 +34,7 @@ const EditTemplate = (props) => {
 
         } else {
 
-            if (inputName === "Author") {
+            if (inputName === AUTHOR) {
 
                 newState[id].value[authorId].fullName = e.target.value;
     
@@ -62,7 +64,7 @@ const EditTemplate = (props) => {
             return;
         }
 
-        if (props.editTitle === "book") {
+        if (props.editTitle === BOOK_LOWERCASE) {
 
             for (let key in editDataState) {
                 
@@ -70,7 +72,7 @@ const EditTemplate = (props) => {
                     return;
                 }
     
-                if(editDataState[key].title === "Author") {
+                if(editDataState[key].title === AUTHOR) {
                     
                     for (let authorKey in editDataState[key].value) {
     
@@ -89,7 +91,7 @@ const EditTemplate = (props) => {
     
                 for (let authorsKey in editDataState[key].value) {
     
-                    if (editDataState[key].title === "Author") {
+                    if (editDataState[key].title === AUTHOR) {
     
                         authorsData.push(
                             editDataState[key].value[authorsKey].fullName
@@ -104,7 +106,7 @@ const EditTemplate = (props) => {
 
         let data = {};
 
-        if (props.editTitle === "book") {
+        if (props.editTitle === BOOK_LOWERCASE) {
 
             data = {
                 thumbnailUrl: editDataState[0].value,
@@ -112,8 +114,6 @@ const EditTemplate = (props) => {
                 authors: authorsData,
                 shortDescription: editDataState[3].value.slice(0, 50),
                 longDescription: editDataState[3].value,
-                pageCount: editDataState[4].value,
-                borrowed: editDataState[5].value
             }
 
         } else {
@@ -130,7 +130,7 @@ const EditTemplate = (props) => {
 
         }
 
-        fetchMethod("https://library-38cf7-default-rtdb.firebaseio.com/" + props.fetchDataName + "/" + id + ".json", "PUT", data, null);
+        fetchMethod("https://library-38cf7-default-rtdb.firebaseio.com/" + props.fetchDataName + "/" + id + ".json", PUT, data, null);
 
     }
 
@@ -144,29 +144,29 @@ const EditTemplate = (props) => {
 
                 {
 
-                    el.tag === "input" ?
+                    el.tag === TagInput ?
 
-                        <div className="EditElement">
+                        <div className={EditElement}>
 
                             <p><b>{el.title}: </b></p>
                             <Element type={el.type} onChange={(e) => onInputChange(e, el.name, index, null)} value={el.value} name={el.title}/>
-                            <div className="InputError" style={{display: el.error ? "block" : "none"}}>Required field</div>
+                            <div className={InputError} style={{display: el.error ? "block" : "none"}}>Required field</div>
 
                         </div>
 
                     :
 
-                    el.name === "authors" ?
+                    el.name === AUTHORS_LOWERCASE ?
 
                         el.value.map((author, authorIndex) => {
 
                             return (
 
-                                <div className="EditElement" key={authorIndex}>
+                                <div className={EditElement} key={authorIndex}>
 
                                     <p><b>{el.title}: </b></p>
                                     <input type={author.type} onChange={(e) => onInputChange(e, el.title, index, authorIndex)} value={author.fullName} name={el.title} />
-                                    <div className="InputError" style={{display: author.error ? "block" : "none"}}>Required field</div>
+                                    <div className={InputError} style={{display: author.error ? "block" : "none"}}>Required field</div>
 
                                 </div>
                                 
@@ -182,11 +182,11 @@ const EditTemplate = (props) => {
 
                     :
 
-                        <div className="EditElement">
+                        <div className={EditElement}>
 
                             <p><b>{el.title}: </b></p>
                             <textarea type={el.type} onChange={(e) => onInputChange(e, el.name, index, null)} value={el.value} name={el.title}></textarea>
-                            <div className="InputError" style={{display: el.error ? "block" : "none"}}>Required field</div>
+                            <div className={InputError} style={{display: el.error ? "block" : "none"}}>Required field</div>
 
                         </div>
 
@@ -199,6 +199,8 @@ const EditTemplate = (props) => {
 
     })
 
+    const setLinkBackground = isItChangedState ? "#3d9749" : "grey";
+
     return (
 
         <div className="Edit">
@@ -208,17 +210,17 @@ const EditTemplate = (props) => {
             {editMap}
 
             <Link 
-                to={isItChangedState ? props.editTitle === "user" ? "/all-users" : "/" : "#"} 
+                to={isItChangedState ? props.editTitle === USER_LOWERCASE ? "/all-users" : "/" : "#"} 
                 style={{
-                    background: isItChangedState ? "#3d9749" : "grey", 
-                    borderColor: isItChangedState ? "#3d9749" : "grey",
+                    background: setLinkBackground, 
+                    borderColor: setLinkBackground,
                     cursor: isItChangedState ? "pointer" : "not-allowed"}}
                     onClick={saveHandler}>
             Save</Link>
 
             <Link 
                 style={{background: "#fd8989", borderColor: "#fd8989"}} 
-                to={props.editTitle === "user" ? "/all-users" : "/"}>
+                to={props.editTitle === USER_LOWERCASE ? "/all-users" : "/"}>
             Cancel</Link>
 
         </div>

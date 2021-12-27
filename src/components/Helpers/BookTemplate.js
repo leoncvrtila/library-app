@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { AUTHOR, AUTHORS } from "./reusableVariables";
 
 const BookTemplate = (props) => {
 
@@ -22,13 +23,13 @@ const BookTemplate = (props) => {
                 </div>
                 
 
-                <p> <b>{props.book.authors.length === 1 ? 'Author' : 'Authors'}: </b>
+                <p> <b>{props.book.authors.length === 1 ? AUTHOR : AUTHORS}: </b>
                     { 
                         props.book.authors.map(author => {
 
                             return (
                                 
-                                <span className="Author" key={author}>
+                                <span className={AUTHOR} key={author}>
                                     {author}
                                 </span>
 

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Inputs from "../Helpers/Inputs";
 import { inputUserData } from "../Helpers/inputData";
+import { USER } from "../Helpers/reusableVariables";
 
 const AddUser = () => {
 
@@ -14,7 +15,7 @@ const AddUser = () => {
             inputsState={inputsState}
             setInputsState={setInputsState}
             inputData={inputUserData}
-            addingNew={"USER"}
+            addingNew={USER}
         />
 
     )
