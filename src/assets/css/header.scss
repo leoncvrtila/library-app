@@ -1,0 +1,68 @@
+/*-----------------RESPONSIVE*/
+
+$mob: 425px;
+$tablet: 768px;
+$laptop-small: 1024px;
+$laptop: 1440px;
+
+$medium-screens-mob: 425px + 1;
+$laptop-screens-laptop-small: 1024px - 1;
+$laptop-screens-laptop-big: 1440px + 1;
+
+@mixin respond-to($media) {
+  @if $media == mob {
+    @media only screen and (max-width: $mob) { @content; }
+  }
+  @else if $media == medium-screens {
+    @media only screen and (min-width: $medium-screens-mob) and (max-width: $tablet) { @content; }
+  }
+  @else if $media == laptop-screens {
+    @media only screen and (min-width: $laptop-screens-laptop-small) and (max-width: $laptop-screens-laptop-big) { @content; }
+  }
+  @else if $media == wide-screens {
+    @media only screen and (min-width: $laptop) { @content; }
+  }
+}
+
+
+/*-----------------HEADER*/
+
+// NAVIGATION
+
+nav {
+  display: flex;
+  justify-content: space-evenly;
+  margin: auto;
+  width: 70%;
+  padding: 3% 0%;
+  margin-bottom: 1%;
+
+  @include respond-to(mob) { 
+    bottom: 0;
+    position: fixed;
+    background: white;
+    margin: 0;
+    width: 100%;
+    border-top: 2px solid;
+  }
+  @include respond-to(medium-screens) { 
+
+  }
+  @include respond-to(laptop-screens) { 
+
+  }
+  @include respond-to(wide-screens) { 
+
+  }
+}
+
+nav a, nav a:visited, nav a:active {
+  text-decoration: none;
+  color: black;
+  transition: ease-in;
+  transition-duration: 0.1s;
+}
+
+nav a:hover {
+  color: #414141;
+}

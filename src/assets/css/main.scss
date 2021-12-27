@@ -1,0 +1,370 @@
+/*-----------------RESPONSIVE*/
+
+$mob: 425px;
+$tablet: 768px;
+$laptop-small: 1024px;
+$laptop: 1440px;
+
+$medium-screens-mob: 425px + 1;
+$laptop-screens-laptop-small: 1024px - 1;
+$laptop-screens-laptop-big: 1440px + 1;
+
+@mixin respond-to($media) {
+  @if $media == mob {
+    @media only screen and (max-width: $mob) { @content; }
+  }
+  @else if $media == medium-screens {
+    @media only screen and (min-width: $medium-screens-mob) and (max-width: $tablet) { @content; }
+  }
+  @else if $media == laptop-screens {
+    @media only screen and (min-width: $laptop-screens-laptop-small) and (max-width: $laptop-screens-laptop-big) { @content; }
+  }
+  @else if $media == wide-screens {
+    @media only screen and (min-width: $laptop) { @content; }
+  }
+}
+
+
+/*-----------------MAIN*/
+
+// ELEMENTS
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 4%;
+}
+
+.GreenButton {
+  padding: 1% 2%;
+  outline: none;
+  border: 1px solid #3d9749;
+  background: #3d9749;
+  color: white;
+  transition: ease-in;
+  transition-duration: 0.2s;
+
+  @include respond-to(mob) { 
+    padding: 3% 6%;
+  }
+
+}
+
+.GreenButton:hover {
+  background: #50aa5c;
+  border: 1px solid #50aa5c;
+  cursor: pointer;
+}
+
+.GrayButton {
+  padding: 1% 2%;
+  outline: none;
+  border: 1px solid grey;
+  background: grey;
+  color: white;
+  transition: ease-in;
+  transition-duration: 0.2s;
+
+  @include respond-to(mob) { 
+    padding: 1% 4%;
+  }
+
+}
+
+.GrayButton:hover {
+  background: #a0a0a0;
+  border: 1px solid #a0a0a0;
+  cursor: pointer;
+}
+
+// ALL BOOKS
+
+.Book {
+  margin: 2% 0%;
+  padding: 2%;
+  background: #f5f5f5;
+  border: 1px solid #e7e7e7;
+  display: flex;
+  transition: ease-in;
+  transition-duration: 0.2s;
+}
+
+.Book:hover {
+  cursor: pointer;
+  box-shadow: 0px 1px 6px 1px rgba(0, 0, 0, 0.25);
+}
+
+.Book > div:nth-child(1) {
+  width: 20%;
+}
+
+.Book > div:nth-child(2) {
+  width: 70%;
+  margin-left: 2%;
+}
+
+.AllBooksWrapp {
+  display: block;
+  justify-content: center;
+  width: 60%;
+  margin: auto;
+
+  @include respond-to(mob) { 
+    margin-top: 5%;
+    width: 95%;
+  }
+
+  @include respond-to(medium-screens) { 
+    width: 80%;
+  }
+
+  @include respond-to(laptop-screens) { 
+    width: 80%;
+  }
+
+}
+
+.Book p {
+  margin: 2% 0%;
+}
+
+.Author:not(:first-of-type) {
+  border-left: 1px solid grey;
+  margin-left: 1%;
+  padding-left: 1%;
+}
+
+.Book img {
+  width: 100%;
+}
+
+.BookHeader h3 {
+  font-size: 16px;
+
+  @include respond-to(mob) { 
+    font-size: 15px;
+  }
+
+}
+
+.Book p {
+  font-size: 14px;
+}
+
+.BookHeaderButton {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  height: 90%;
+  @extend .GrayButton;
+}
+
+.BookHeaderButton:hover  {
+  @extend .GrayButton:hover;
+}
+
+.BookBorrowButton {
+  @extend .GreenButton;
+}
+
+.BookBorrowButton:hover {
+  @extend .GreenButton:hover;
+}
+
+.BookHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+// ADD BOOK
+
+.AddBook {
+  width: 60%;
+  margin: auto;
+
+  @include respond-to(mob) { 
+    width: 70%;
+    margin-top: 5%;
+  }
+
+}
+
+.AddBook p {
+  margin-top: 2%;
+  margin-bottom: 0.6%;
+
+  @include respond-to(mob) { 
+    margin-top: 5%;
+  }
+
+}
+
+.AddBook input, .AddBook textarea {
+  outline: none;
+  padding: 1%;
+  border: 1px solid gray;
+  min-width: 40%;
+  max-width: 40%;
+
+  @include respond-to(mob) { 
+    min-width: 80%;
+    max-width: 80%;
+    padding: 2%;
+  }
+
+}
+
+.AddBookButton {
+  @extend .GreenButton;
+  display: block;
+  margin-top: 2%;
+}
+
+.AddBookButton:hover {
+  @extend .GreenButton:hover;
+}
+
+.InputError {
+  display: block;
+  max-width: 20%;
+  background: #fb7272;
+  font-size: 13px;
+  padding: 0.5%;
+  margin-top: 0.5%;
+  text-align: center;
+  color: white;
+
+  @include respond-to(mob) { 
+    max-width: 50%;
+    padding: 2%;
+  }
+
+}
+
+// ALL USERS
+
+.AllUsers {
+  display: grid;
+  column-gap: 3%;
+  row-gap: 0.5%;
+  grid-template-columns: auto auto auto;
+  width: 70%;
+  margin: auto;
+
+  @include respond-to(mob) { 
+    margin-top: 5%;
+    grid-template-columns: auto;
+    row-gap: 0.1%;
+  }
+
+  @include respond-to(medium-screens) { 
+    grid-template-columns: auto auto;
+    row-gap: 0.2%;
+  }
+
+  @include respond-to(laptop-screens) { 
+    width: 80%;
+  }
+  
+}
+
+.User {
+  padding: 7%;
+  background: #f5f5f5;
+  border: 1px solid #e7e7e7;
+  transition: ease-in;
+  transition-duration: 0.2s;
+} 
+
+.User:hover {
+  cursor: pointer;
+  box-shadow: 0px 1px 6px 1px rgba(0, 0, 0, 0.15);
+}
+
+.User img {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  height: 100px;
+}
+
+.User h3 {
+  margin-top: 10%;
+  margin-bottom: 2%;
+}
+
+.User p {
+  margin: 2% 0%;
+}
+
+.User p:nth-child(7) {
+  margin-bottom: 7%;
+}
+
+.UserButton {
+  margin-top: 3%;
+  padding: 2% 5%;
+  text-decoration: none;
+  font-size: 15px;
+  @extend .GrayButton;
+}
+
+.UserButton:hover {
+  @extend .GrayButton:hover;
+}
+
+// EDIT
+
+.Edit {
+  width: 60%;
+  margin: auto;
+
+  @include respond-to(mob) { 
+    margin-top: 5%;
+    width: 70%;
+  }
+
+}
+
+.EditElement {
+  margin: 2% 0%;
+}
+
+.EditElement:nth-child(8) {
+  @include respond-to(mob) { 
+    margin-bottom: 8%;
+  }
+
+}
+
+.EditElement p {
+  margin-bottom: 1%;
+}
+
+.EditElement input, .EditElement textarea {
+  padding: 0.8% 1.5%;
+  outline: none;
+  max-width: 50%;
+  min-width: 50%;
+  border: 1px solid gray;
+
+  @include respond-to(mob) { 
+    max-width: 80%;
+    min-width: 80%;
+    padding: 2% 3.5%;
+  }
+
+}
+
+.Edit a {
+  font-size: 15px;
+  color: white;
+  text-decoration: none;
+  @extend .GreenButton;
+}
+
+.Edit a:hover {
+  @extend .GreenButton:hover;
+}
+
+.Edit a:last-child{
+  margin-left: 2%;
+}

@@ -1,0 +1,39 @@
+/*-----------------RESPONSIVE*/
+/*-----------------HEADER*/
+nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  margin: auto;
+  width: 70%;
+  padding: 3% 0%;
+  margin-bottom: 1%;
+}
+
+@media only screen and (max-width: 425px) {
+  nav {
+    bottom: 0;
+    position: fixed;
+    background: white;
+    margin: 0;
+    width: 100%;
+    border-top: 2px solid;
+  }
+}
+
+nav a, nav a:visited, nav a:active {
+  text-decoration: none;
+  color: black;
+  -webkit-transition: ease-in;
+  transition: ease-in;
+  -webkit-transition-duration: 0.1s;
+          transition-duration: 0.1s;
+}
+
+nav a:hover {
+  color: #414141;
+}
+/*# sourceMappingURL=header.css.map */
